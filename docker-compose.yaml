@@ -1,0 +1,31 @@
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: qwe123
+    volumes:
+      - ./data/db:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: qwe123
+      ME_CONFIG_MONGODB_URL: mongodb://root:qwe123@mongo:27017/
+      ME_CONFIG_BASICAUTH: false
+
+  receptor:
+    image: kolacx4/receptor
+    restart: always
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --workers 1
+    ports:
+      - 8000:8000
+    depends_on:
+      - mongo
+      - mongo-express
