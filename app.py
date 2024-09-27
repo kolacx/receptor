@@ -1,9 +1,7 @@
 import logging
 from datetime import timedelta
-from typing import Annotated
 
 from fastapi import FastAPI, Depends, HTTPException
-from fastapi.security import OAuth2PasswordRequestForm
 from starlette import status
 from starlette.responses import JSONResponse
 
@@ -50,7 +48,6 @@ async def process_event(event: Event):
         for d in destinations_names
     }
 
-    # Выбираем стратегию фильтрации
     # Choice strategy for filtering by incoming strategy field
     strategy = await detect_strategy(event)
 

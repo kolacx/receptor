@@ -2,9 +2,9 @@
 Test task
 
 # Comments
-Project published at Docker Hub Repository kolacx4/receptor 
+Project is published at Docker Hub Repository kolacx4/receptor 
 
-For run project you need just [docker-compose.yaml](https://github.com/kolacx/receptor/blob/main/docker-compose.yaml) file
+In order to start the project you need to download [docker-compose.yaml](https://github.com/kolacx/receptor/blob/main/docker-compose.yaml) file
 
 After running projects near docker-compose.yaml will be created data/ file, where saved databases (data/db)
 
@@ -12,13 +12,13 @@ To reconfigure the database, use the mongo-express web interface
 
 To see all tables follow by http://localhost:8081/db/receptor url after init_db.sh (read below)
 
-All requests and responses write at logs docs (Enabled after first /events)
+All requests and responses write at logs docs (Enabled after first /event)
 
-All printing logs available by docker logs
+All logs are available by docker logs
 ```sh
 docker logs -f receptor-backend
 ```
-Services url
+Service urls
 - http://localhost:8000/ping-post
 - http://localhost:8000/ping-get
 
@@ -51,7 +51,7 @@ Init database
 ```sh
 docker exec -it receptor-backend ./init_db.sh
 ```
-File init_db.sh created default Strategy:
+File init_db.sh creates default Strategy records:
 ```json
 [
     {
@@ -103,11 +103,6 @@ http://localhost:8000/redoc
 http://localhost:8000/doc
 ```
 
-Project available by address
-```
-http://localhost:8000/
-```
-
 Mongo-express available by address
 ```
 http://localhost:8081/
@@ -135,7 +130,7 @@ Response
 
 Events url
 ```
-[POST] http://localhost:8000/events
+[POST] http://localhost:8000/event
 [HEADERS] Authorization: Bearer <token>
 ```
 
