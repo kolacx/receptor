@@ -12,7 +12,7 @@ from auth import Token, authenticate_user, ACCESS_TOKEN_EXPIRE_MINUTES, create_a
 from loader import create_dispatcher, ListenerException, DispatcherException
 from models import Logs
 from database import logs_collection, users_collection
-from schemas import Event, CreateUser
+from schemas import Event, CreateUser, LoginUser
 from services import detect_strategy, filtering_by_strategy, EvalStrategyError, get_destinations
 
 app = FastAPI()
@@ -140,10 +140,8 @@ async def create_user(user: CreateUser):
 
 
 @app.post("/token")
-async def login_for_access_token(
-        form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
-) -> Token:
-    user = await authenticate_user(users_collection, form_data.username, form_data.password)
+async def login_for_access_token(user: LoginUser) -> Token:
+    user = await authenticate_user(users_collection, user.username, user.password)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

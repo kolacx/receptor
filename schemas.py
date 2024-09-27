@@ -17,3 +17,7 @@ class Event(BaseModel):
 class CreateUser(BaseModel):
     username: str
     password: str
+
+
+class LoginUser(CreateUser):
+    pass

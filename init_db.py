@@ -1,5 +1,7 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 
+from auth import get_password_hash
+
 MONGO_URL = "mongodb://root:qwe123@mongo:27017/"
 DATABASE_NAME = "receptor"
 
@@ -52,3 +54,11 @@ destinations = [
 
 destinations_collection.insert_many(destinations)
 
+users = [
+    {
+        "username": "admin",
+        "hashed_password": get_password_hash('qwe123')
+    }
+]
+
+users_collection.insert_many(users)
